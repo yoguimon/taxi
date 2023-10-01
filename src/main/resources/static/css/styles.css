@@ -1,0 +1,46 @@
+.form-inputs {
+    margin-bottom: 0px;
+}
+
+.form-inputs input,
+.form-inputs label {
+    margin-bottom: 0px;
+}
+
+.form-inputs label {
+    color: #3B61D1; /* Cambia el color de los labels a rojo */
+    font-size: 10px; /* Oculta los labels inicialmente */
+    margin-rigth: 50px;
+}
+
+label{
+    margin-left: 20px;
+}
+#cuerpo{
+    z-index: 1;
+}
+#lblpass{
+    display: none;
+}
+
+
+.ocultar {
+    display: none;
+}
+
+/* Clase para mostrar un elemento */
+.mostrar {
+    display: block;
+}
+#map-container {
+    height: 500%;
+}
+.table-container {
+     display: flex;
+     justify-content: center; /* Centrar horizontalmente */
+     align-items: center; /* Centrar verticalmente */
+     height: 100vh; /* Esto hace que el contenedor ocupe el 100% del alto de la ventana */
+}
+.leaflet-container {
+    font-size: 16px; /* Ajusta el tamaño de fuente según tus preferencias */
+}
