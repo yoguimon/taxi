@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Data
-@Table(name="cliente")
+@Table(name="vehiculo")
 public class Vehiculo {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -27,7 +27,7 @@ public class Vehiculo {
     @Column(name="tipo")
     private String tipo;
     @Column(name="estado")
-    private String estado;
+    private byte estado;
     @CreationTimestamp
     @Column(name="fechaRegistro")
     private LocalDateTime fechaRegistro;

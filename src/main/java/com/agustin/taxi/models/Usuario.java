@@ -15,8 +15,8 @@ public class Usuario {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name="idUsuario")
     private byte idUsuario;
-    @Column(name="login")
-    private String login;
+    @Column(name="correo")
+    private String correo;
     @Column(name="password")
     private String password;
     @Column(name="rol")
@@ -29,4 +29,27 @@ public class Usuario {
     @UpdateTimestamp
     @Column(name="fechaActualizacion")
     private LocalDateTime fechaActualizacion;
+
+    public Usuario() {
+    }
+
+    public Usuario(String correo, String password, String rol, byte estado) {
+        this.correo = correo;
+        this.password = password;
+        this.rol = rol;
+        this.estado = estado;
+    }
+
+    public Usuario(byte idUsuario, String correo, String password, String rol, byte estado) {
+        this.idUsuario = idUsuario;
+        this.correo = correo;
+        this.password = password;
+        this.rol = rol;
+        this.estado = estado;
+    }
+
+    public Usuario(String correo, String password) {
+        this.correo = correo;
+        this.password = password;
+    }
 }

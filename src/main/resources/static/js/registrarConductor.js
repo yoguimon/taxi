@@ -1,5 +1,4 @@
 async function agregarConductor(datos){
-        alert("agregando...");
         const request = await fetch('api/conductores', {
                 method: 'POST',
                 headers: {
@@ -17,6 +16,7 @@ function validarConductor(){
     jsonInformacion.segundoApellido=document.getElementById('txtapellidoM').value;
     jsonInformacion.telefono=document.getElementById('txttelefono').value;
     jsonInformacion.numLicencia=document.getElementById('txtnumeroL').value;
+    jsonInformacion.correo=document.getElementById('txtcorreo').value;
     jsonInformacion.rol=document.getElementById('cbxrol').value;
     jsonInformacion.placa=document.getElementById('txtplaca').value;
     jsonInformacion.marca=document.getElementById('txtmarca').value;
@@ -28,6 +28,7 @@ function validarConductor(){
     const errorApellidoM = document.getElementById('lblErrorApellidoM');
     const errorTelefono = document.getElementById('lblErrorTelefono');
     const errorNumeroL = document.getElementById('lblErrorNumeroL');
+    const errorCorreo = document.getElementById('lblErrorCorreo');
     const errorPlaca = document.getElementById('lblErrorPlaca');
     const errorMarca = document.getElementById('lblErrorMarca');
     const errorColor = document.getElementById('lblErrorColor');
@@ -37,12 +38,13 @@ function validarConductor(){
     errorApellidoM.innerHTML = validarApellidoM(jsonInformacion.segundoApellido);
     errorTelefono.innerHTML = validarTelefono(jsonInformacion.telefono);
     errorNumeroL.innerHTML = validarCarnet(jsonInformacion.numLicencia);
+    errorCorreo.innerHTML = validarCorreo(jsonInformacion.correo);
     errorPlaca.innerHTML = validarPlaca(jsonInformacion.placa);
     errorMarca.innerHTML = validarDireccion(jsonInformacion.marca);
     errorColor.innerHTML = validarNombre(jsonInformacion.color);
 
     if(errorNombre.innerHTML==="" && errorApellidoP.innerHTML==="" && errorApellidoM.innerHTML === "" && errorTelefono.innerHTML===""
-            && errorNumeroL.innerHTML==="" && errorPlaca.innerHTML==="" && errorMarca.innerHTML==="" && errorColor.innerHTML==="") {
+            && errorNumeroL.innerHTML==="" && errorCorreo.innerHTML==="" && errorPlaca.innerHTML==="" && errorMarca.innerHTML==="" && errorColor.innerHTML==="") {
             agregarConductor(jsonInformacion);
      }
 }

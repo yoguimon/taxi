@@ -27,6 +27,8 @@ public class Conductor {
     private String telefono;
     @Column(name="numLicencia")
     private String numLicencia;
+    @Column(name="correo")
+    private String correo;
     @Column(name="estado")
     private byte estado;
     @CreationTimestamp
@@ -38,6 +40,11 @@ public class Conductor {
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "conductor") //importante, mapea con lugar PONE TODOS LOS DATOS DEL lugar DE ESTE CLIENTE
     private List<Vehiculo> vehiculos;
+    public Conductor() {
+    }
+    public Conductor(Long idConductor) {
+        this.idConductor = idConductor;
+    }
 
 
 }

@@ -9,6 +9,7 @@ public class DtoConductorVehiculo {
     private String segundoApellido;
     private String telefono;
     private String numLicencia;
+    private String correo;
     private String rol;
     private String placa;
     private String marca;
@@ -18,12 +19,13 @@ public class DtoConductorVehiculo {
     public DtoConductorVehiculo() {
     }
 
-    public DtoConductorVehiculo(String nombre, String primerApellido, String segundoApellido, String telefono, String numLicencia, String rol, String placa, String marca, String color, String tipo) {
+    public DtoConductorVehiculo(String nombre, String primerApellido, String segundoApellido, String telefono, String numLicencia, String correo, String rol, String placa, String marca, String color, String tipo) {
         this.nombre = nombre;
         this.primerApellido = primerApellido;
         this.segundoApellido = segundoApellido;
         this.telefono = telefono;
         this.numLicencia = numLicencia;
+        this.correo = correo;
         this.rol = rol;
         this.placa = placa;
         this.marca = marca;

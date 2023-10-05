@@ -25,4 +25,16 @@ public class ConductorController {
     public void registrarConductor(@RequestBody DtoConductorVehiculo request){
         conductorDaoImp.crearConductor(request);
     }
+    @GetMapping("api/conductores/{id}")
+    public Conductor getConductor(@PathVariable Long id){
+        return conductorDaoImp.getPersona(id);
+    }
+    @PutMapping("api/conductores")
+    public void setConductor(@RequestBody Conductor conductor){
+        conductorDaoImp.modificar(conductor);
+    }
+    @DeleteMapping("api/conductores/{id}")
+    public void deleteConductor(@PathVariable Long id){
+        conductorDaoImp.eliminar(id);
+    }
 }
