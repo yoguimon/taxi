@@ -81,10 +81,10 @@ public class UsuarioDaoImp implements CrudDao<Usuario>{
 
     public boolean verificarSiExiste(String email) {
         try {
-            String sql = "SELECT email FROM usuario WHERE email = :email";
+            String sql = "SELECT correo FROM usuario WHERE correo = :correo";
             List<String> results = entityManager
                     .createNativeQuery(sql)
-                    .setParameter("email", email)
+                    .setParameter("correo", email)
                     .getResultList();
             // Verificar si la lista de resultados no está vacía
             return !results.isEmpty();

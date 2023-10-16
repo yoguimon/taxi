@@ -40,6 +40,9 @@ public class Conductor {
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "conductor") //importante, mapea con lugar PONE TODOS LOS DATOS DEL lugar DE ESTE CLIENTE
     private List<Vehiculo> vehiculos;
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "conductor") //importante, mapea con lugar PONE TODOS LOS DATOS DEL lugar DE ESTE CLIENTE
+    private List<Servicio> servicios;
     public Conductor() {
     }
     public Conductor(Long idConductor) {

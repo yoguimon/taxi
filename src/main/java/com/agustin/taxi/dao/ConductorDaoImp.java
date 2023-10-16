@@ -1,12 +1,10 @@
 package com.agustin.taxi.dao;
 
 import com.agustin.taxi.dto.DtoConductorVehiculo;
-import com.agustin.taxi.models.ConductorVehiculo;
-import com.agustin.taxi.models.Usuario;
-import com.agustin.taxi.models.Vehiculo;
+import com.agustin.taxi.dto.DtoMulta;
+import com.agustin.taxi.models.*;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import com.agustin.taxi.models.Conductor;
 import jakarta.persistence.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -45,7 +43,15 @@ public class ConductorDaoImp implements CrudDao<Conductor>{
 
     @Override
     public void modificar(Conductor conductor) {
-        entityManager.merge(conductor);
+        Conductor viejo = entityManager.find(Conductor.class,conductor.getIdConductor());
+        viejo.setNombre(conductor.getNombre());
+        viejo.setPrimerApellido(conductor.getPrimerApellido());
+        viejo.setSegundoApellido(conductor.getSegundoApellido());
+        viejo.setTelefono(conductor.getTelefono());
+        viejo.setNumLicencia(conductor.getNumLicencia());
+        //viejo.setCorreo(conductor.getCorreo());
+        viejo.setEstado((byte)1);
+        entityManager.merge(viejo);
     }
 
     public List<ConductorVehiculo> getTodosVehiculosXID(Byte id) {
@@ -86,4 +92,6 @@ public class ConductorDaoImp implements CrudDao<Conductor>{
         usuario.setEstado((byte)1);
         entityManager.persist(usuario);
     }
+
+
 }

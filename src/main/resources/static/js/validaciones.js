@@ -55,6 +55,17 @@ function validarDireccion(direccion){
         return "";
      }
 }
+function validarMultaConductor(direccion){
+    if(direccion===""){
+         return "Ingreso tipo de Multa"
+     }else if(direccion.length>40){
+         return "Nombre de multa mul larga";
+     }else if(direccion.length<5){
+        return "Descripcion de multa muy corto";
+     }else{
+        return "";
+     }
+}
 function validarTelefono(telefono){
     if (telefono === "") {
          return "Ingrese su telefono";
@@ -185,6 +196,15 @@ function validarPlaca(placa){
         return "Ingrese placa";
     }else if(!validarP(placa)){
         return "placa en formato incorrecto!";
+    }else{
+        return "";
+    }
+}
+function validarCosto(costo){
+    if(costo===""){
+        return "Ingrese costo";
+    }else if(!esNro(costo)){
+        return "el costo debe ser un nro";
     }else{
         return "";
     }

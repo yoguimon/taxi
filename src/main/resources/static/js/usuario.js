@@ -154,3 +154,98 @@ async function agregarPassBD(correo,passs){
                     alert("respodio otra cosa");
                 }
 }
+function correoEsValido(){
+    const email = document.getElementById('txtemail').value
+    const errorEmail = document.getElementById('lblErrorEmail');
+    if(email===''){
+        errorEmail.innerHTML="Ingrese correo";
+    }else if(!esValidoCorreo(email)){
+        errorEmail.innerHTML="Correo en formato incorrecto";
+    }else{
+        errorEmail.innerHTML="";
+    }
+    if(errorEmail.innerHTML===""){
+        existeCorreo(email);
+    }
+}
+async function existeCorreo(email){
+    const botonEnviar = document.getElementById('enviarCorreo');
+    botonEnviar.disabled = true;
+    botonEnviar.textContent = 'Espere unos segundos...';
+
+    const errorEmail = document.getElementById('lblErrorEmail');
+    const requestData = { email: email };
+    const request = await fetch('api/usuarios/verificarEmail', {
+    method: 'POST',
+    headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(requestData)
+    });
+    const answer = await request.text();
+    botonEnviar.disabled = false;
+    botonEnviar.textContent = 'Cambiar Contraseña';
+    if(answer=='existe'){
+        errorEmail.innerHTML="Revisa tu correo, te enviamos un link";
+    }else if(answer=='fail'){
+        errorEmail.innerHTML="El correo no esta registrado en la Base de Datos";
+    }else{
+        errorEmail.innerHTML="algo raro paso!";
+    }
+}
+
+function validarContrasenaCorreo(){
+
+        const nueva = document.getElementById('txtnuevapass');
+        const repetirnueva = document.getElementById('txtrepetirpass');
+        const errorNueva=document.getElementById('lblError2');
+        const errorRepetir=document.getElementById('lblError3');
+
+        if(nueva.value===''){
+            errorNueva.innerHTML="Ingrese su pass nueva";
+        }else if(!esValidaLaContrasena(nueva.value)){
+            errorNueva.innerHTML="La contraseña debe ser >= 8 digitos. Al menos tener 1 letra mayuscula, 1 miniscula, 1 numero y 1 caracter especial";
+        }else if(nueva.value.length<8){
+            errorNueva.innerHTML="no debe ser menor a 8 digitos";
+        }else{
+            errorNueva.innerHTML="";
+        }
+
+        if(repetirnueva.value===''){
+            errorRepetir.innerHTML="Este campo no puede estar vacio";
+        }else if(repetirnueva.value!==nueva.value){
+            errorRepetir.innerHTML="las pass no coinciden";
+        }else{
+            errorRepetir.innerHTML="";
+        }
+
+        if (errorNueva.innerHTML === "" && errorRepetir.innerHTML === "") {
+            agregarPassBDCorreo(nueva.value);//aqui revisar como obtener el correo
+        }
+}
+async function agregarPassBDCorreo(passs){
+    const urlActual = window.location.href;
+    const url = new URL(urlActual);
+    const correo = url.searchParams.get("email");
+    let datos = {};
+        datos.correo = correo;
+        datos.password = passs;
+         const request = await fetch('api/usuarios/passwordXcorreo', {
+                        method: 'POST',
+                        headers: {
+                          'Accept': 'application/json',
+                          'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(datos)
+                });
+                const answer = await request.text();
+                if(answer=='exito'){
+                    window.location.href = 'login.html';
+
+                }else if(answer=='fail'){
+                    alert("fallo algo, revisar");
+                }else{
+                    alert("respodio otra cosa");
+                }
+}
