@@ -20,6 +20,17 @@ function validarNombre(nombre){
             return "";
         }
 }
+function validarNombreC(nombre){//validarNombreServicio
+    if(nombre===""){
+        return "Ingrese el nombre del Conductor";
+    }else if(esNro(nombre)){
+        return "Ingrese un nombre del Conductor";
+    }else if(!soloLetras(nombre)){
+        return "El nombres debe ser de solo letras";
+    }else{
+        return "";
+    }
+}
 function validarApellidoP(apellidoP){
     if(apellidoP===""){
         return "Ingrese el apellido";

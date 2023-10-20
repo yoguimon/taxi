@@ -24,6 +24,8 @@ public class Servicio {
     private double costo;
     @Column(name="tipo")
     private String tipo;
+    @Column(name="placa")
+    private String placa;
     @Column(name="estado")
     private byte estado;
     @CreationTimestamp
@@ -32,4 +34,37 @@ public class Servicio {
     @UpdateTimestamp
     @Column(name="fechaActualizacion")
     private LocalDateTime fechaActualizacion;
+
+    public Servicio() {
+    }
+
+    public Servicio(Long idServicio, Conductor conductor, String nombre, double costo, String tipo, String placa, byte estado, LocalDateTime fechaCreacion, LocalDateTime fechaActualizacion) {
+        this.idServicio = idServicio;
+        this.conductor = conductor;
+        this.nombre = nombre;
+        this.costo = costo;
+        this.tipo = tipo;
+        this.placa = placa;
+        this.estado = estado;
+        this.fechaCreacion = fechaCreacion;
+        this.fechaActualizacion = fechaActualizacion;
+    }
+
+    public Servicio(Long idServicio, Conductor conductor, String nombre, double costo, String tipo, String placa, byte estado) {
+        this.idServicio = idServicio;
+        this.conductor = conductor;
+        this.nombre = nombre;
+        this.costo = costo;
+        this.tipo = tipo;
+        this.placa = placa;
+        this.estado = estado;
+    }
+
+    public Servicio(Long idServicio, String nombre, double costo, String tipo, String placa) {
+        this.idServicio = idServicio;
+        this.nombre = nombre;
+        this.costo = costo;
+        this.tipo = tipo;
+        this.placa = placa;
+    }
 }

@@ -204,7 +204,74 @@
             </div>
           </div>
         </div>
+        <!--MODAL Multas-->
+        <div class="modal fade" id="modalMultaConductor" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Editar Multa</h1>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form class="user">
+                  <div class="form-group row">
+                    <div class="col-sm-6">
+                      <label for="txtnombreMulta" style="color:blue; font-size: 16px;">Nombre del conductor:</label>
+                      <input type="text" class="form-control form-control-user" id="txtnombreMulta"
+                             placeholder="Nombre" readonly>
+                    </div>
+                    <div class="col-sm-6">
+                      <label for="txtplacaMulta" style="color:blue; font-size: 16px;">Placa del Vehiculo:</label>
+                      <input type="text" class="form-control form-control-user" id="txtplacaMulta"
+                             placeholder="placa" readonly>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <div class="col-sm-8 form-group">
+                      <label for="cbxmultaEdicion" style="color:blue; font-size: 16px;">Tipo de Multa:</label>
+                      <select class="form-control" id="cbxmultaEdicion" name="rol" onchange="ponerCostoMulta()">
+                        <option value="" selected disabled>Seleccionar:</option>
+                        <option value="Incumplimiento Turno">Incumplimiento Turno</option>
+                        <option value="Incumplimiento Traslado Pasajeros">Incumplimiento Traslado Pasajeros</option>
+                        <option value="Incumplimiento de Horario">Incumplimiento de Horario</option>
+                        <option value="Incumplimiento de Asistencia a Reuniones">Incumplimiento de Asistencia a Reuniones</option>
+                        <option value="">Otro tipo de Multa</option>
+                      </select>
+                      <label id="lblErrorTipoMulta" value=""></label>
+                    </div>
+                    <div class="col-sm-4">
+                      <label for="txtcostoMulta" style="color:blue; font-size: 16px;">Costo Multa:</label>
+                      <input type="text" class="form-control form-control-user"
+                             id="txtcostoMulta" disabled>
+                      <label id="lblErrorCosto" value=""></label>
+                    </div>
+                  </div>
+                  <div class="form-group row" style="display: none;" id="otraMultaDiv">
+                    <div class="col-sm-8 form-group">
+                      <input type="text" class="form-control form-control-user" id="txtotraMulta"
+                             placeholder="Ingrese Tipo de Multa">
+                      <label id="lblErrorOtraMulta" value=""></label>
+                    </div>
+                  </div>
 
+                </form>
+                <div class="form-group row" id="botones">
+                  <div class="col-sm-6 mb-3 mb-sm-0">
+                    <button id="btnSaveChanges" type="button" class="btn btn-primary btn-user btn-block">Modificar</button>
+                  </div>
+                  <div class="col-sm-6">
+                    <button id="btnCancel" type="button" class="btn btn-primary btn-user btn-block" data-dismiss="modal">Cancelar</button>
+                  </div>
+                </div>
+              </div>
+
+
+
+            </div>
+          </div>
+        </div>
 
 
         <!-- DataTales Example -->

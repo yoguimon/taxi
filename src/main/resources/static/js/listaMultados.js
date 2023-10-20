@@ -62,6 +62,7 @@ function agregarMulta(id,nombre,placa){
     multa.nombre="multa";
     multa.costo=document.getElementById('txtcosto').value;
     multa.tipo=document.getElementById('cbxmulta').value;
+    multa.placa=placa;
     const errorTipoMulta = document.getElementById("lblErrorTipoMulta");
     const errorCosto = document.getElementById("lblErrorCosto");
     const errorOtraMulta =document.getElementById('lblErrorOtraMulta');
@@ -107,3 +108,37 @@ function agregarMulta(id,nombre,placa){
         // Redirige a la página "listaLugares.html" con el ID y el nombre en la URL
         window.location.href = `listaMultas.html?id=${idCodificado}`;
  }
+function validarBusquedaConductor(){
+    const nombreC = document.getElementById("txtBusquedaConductor").value.toString();
+    const errorNombreConductor=document.getElementById("lblerrorBusquedaConductor");
+    errorNombreConductor.innerHTML=validarNombreC(nombreC);
+    if(errorNombreConductor.innerHTML===''){
+        buscarNombreCMultado(nombreC);
+    }
+}
+async function buscarNombreCMultado(nombreC){
+    const request = await fetch('api/multados/nombre/'+nombreC, {
+            method: 'GET',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            }
+    });
+    const conductores = await request.json();
+    if(conductores.length === 0){
+        document.getElementById("lblerrorBusquedaConductor").innerHTML="Nombre Incorrecto!";
+    }else{
+          document.getElementById("lblerrorBusquedaConductor").innerHTML="";
+          let listadoHtml = '';
+            //para agragar usuarios de json
+            let cont = 0;
+          for(let conductor of conductores){
+                cont=cont+1;
+                let botonAgregarMultas = '<a href="#" class="btn btn-primary" onclick="agregarMulta(' + conductor[0] + ', \'' + conductor[1] + '\',\'' + conductor[2] + '\')">Agregar Multa</a>';
+                let botonVerMultas = '<a href="#" class="btn btn-warning" onclick="verMultas('+conductor[0]+')">Ver Multas</a>';
+                let multadoHtml =  '<tr><td>'+cont+'</td><td>'+conductor[1]+'</td><td>'+conductor[2]+'</td><td>'+botonAgregarMultas+'</td><td>'+botonVerMultas+'</td></tr>';
+                listadoHtml+=multadoHtml;
+          }
+          document.querySelector('#listaMultados tbody').outerHTML=listadoHtml;
+    }
+}
