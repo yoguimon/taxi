@@ -1,5 +1,7 @@
 package com.agustin.taxi.dao;
 
+import com.agustin.taxi.dto.DtoFrecuencia;
+import com.agustin.taxi.dto.DtoJsonFrecuencia;
 import com.agustin.taxi.dto.DtoMulta;
 import com.agustin.taxi.models.MultaResponse;
 import com.agustin.taxi.models.Conductor;
@@ -96,5 +98,48 @@ public class ServicioDaoImp {
         Servicio servicio=entityManager.find(Servicio.class,id);
         servicio.setEstado((byte)0);
         entityManager.merge(servicio);
+    }
+
+    public void crearFrecuencia(DtoFrecuencia request) {
+        Servicio servicio = new Servicio();
+        Conductor conductor = entityManager.find(Conductor.class,request.getIdConductor());
+        servicio.setConductor(conductor);
+        servicio.setNombre(request.getNombre());
+        servicio.setCosto(request.getCosto());
+        servicio.setTipo(request.getTipo());
+        servicio.setPlaca(request.getPlaca());
+        servicio.setFechaInicio(request.getFechaInicio());
+        servicio.setFechaFin(request.getFechaFin());
+        servicio.setEstado((byte)1);
+        entityManager.persist(servicio);
+    }
+
+    public List<Servicio> getFrecuenciasXid(DtoJsonFrecuencia json) {
+        Conductor conductor =entityManager.find(Conductor.class,json.getIdConductor());
+        String placa=json.getPlaca();
+        String query = "FROM Servicio WHERE conductor = :conductor AND nombre='frecuencia' AND placa=:placa AND estado=1";
+        List<Servicio> lista = entityManager.createQuery(query)
+                .setParameter("conductor",conductor)
+                .setParameter("placa",placa)
+                .getResultList();
+        return lista;
+    }
+
+    public List<Servicio> getMultasDelConductor(Long id) {
+        Conductor conductor = entityManager.find(Conductor.class,id);
+        String query = "FROM Servicio WHERE conductor = :conductor AND nombre='multa' AND estado=1";
+        List<Servicio> lista = entityManager.createQuery(query)
+                .setParameter("conductor",conductor)
+                .getResultList();
+        return lista;
+    }
+
+    public List<Servicio> getFrecuenciasDelConductor(Long id) {
+        Conductor conductor = entityManager.find(Conductor.class,id);
+        String query = "FROM Servicio WHERE conductor = :conductor AND nombre='frecuencia' AND estado=1";
+        List<Servicio> lista = entityManager.createQuery(query)
+                .setParameter("conductor",conductor)
+                .getResultList();
+        return lista;
     }
 }

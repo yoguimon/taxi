@@ -89,6 +89,7 @@ public class ConductorDaoImp implements CrudDao<Conductor>{
         usuario.setCorreo(request.getCorreo());
         usuario.setPassword(request.getNumLicencia());
         usuario.setRol(request.getRol());
+        usuario.setIdConductor(conductor.getIdConductor());
         usuario.setEstado((byte)1);
         entityManager.persist(usuario);
     }

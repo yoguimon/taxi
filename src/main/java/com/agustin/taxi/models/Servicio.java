@@ -5,6 +5,7 @@ import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -26,6 +27,10 @@ public class Servicio {
     private String tipo;
     @Column(name="placa")
     private String placa;
+    @Column(name="fechaInicio")
+    private LocalDate fechaInicio;
+    @Column(name="fechaFin")
+    private LocalDate fechaFin;
     @Column(name="estado")
     private byte estado;
     @CreationTimestamp

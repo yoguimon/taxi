@@ -21,6 +21,8 @@ public class Usuario {
     private String password;
     @Column(name="rol")
     private String rol;
+    @Column(name="idConductor")
+    private Long idConductor;
     @Column(name="estado")
     private byte estado;
     @CreationTimestamp

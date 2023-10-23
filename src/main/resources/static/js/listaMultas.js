@@ -135,14 +135,14 @@ async function editarMulta(multa){
 async function eliminarMulta(id){
     $('#formEliminar').modal('show');
     document.getElementById('botonEliminarElemento').addEventListener('click', async function () {
-    const request = await fetch('api/multas/' + id, {
-        method: 'DELETE',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        }
+        const request = await fetch('api/multas/' + id, {
+            method: 'DELETE',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        });
+        $('#formEliminar').modal('hide');
+        verMultas(obtenerIdDeUrl());
     });
-    $('#formEliminar').modal('hide');
-    verMultas(obtenerIdDeUrl());
-});
 }
