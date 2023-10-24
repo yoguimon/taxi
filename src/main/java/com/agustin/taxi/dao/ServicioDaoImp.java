@@ -39,11 +39,13 @@ public class ServicioDaoImp {
         entityManager.persist(servicio);
     }
 
-    public List<Servicio> getMultasXid(Byte id) {
-        Conductor conductor =entityManager.find(Conductor.class,id);
-        String query = "FROM Servicio WHERE conductor = :conductor AND nombre='multa' AND estado=1";
+    public List<Servicio> getMultasXid(DtoJsonFrecuencia json) {
+        Conductor conductor =entityManager.find(Conductor.class,json.getIdConductor());
+        String placa=json.getPlaca();
+        String query = "FROM Servicio WHERE conductor = :conductor AND nombre='multa' AND placa=:placa AND estado=1";
         List<Servicio> lista = entityManager.createQuery(query)
                 .setParameter("conductor",conductor)
+                .setParameter("placa",placa)
                 .getResultList();
         return lista;
     }

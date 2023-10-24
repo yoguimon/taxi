@@ -35,13 +35,12 @@ public class MultadoController {
     public void registrarFrecuencia(@RequestBody DtoFrecuencia request){
         servicioDaoImp.crearFrecuencia(request);
     }
-    @GetMapping("api/multas/{id}")//idConductor
-    public List<Servicio> getMultasXId(@PathVariable Byte id){
-        return servicioDaoImp.getMultasXid(id);
+    @PostMapping("api/multas/conductor")//idConductor
+    public List<Servicio> getMultasXId(@RequestBody DtoJsonFrecuencia json){
+        return servicioDaoImp.getMultasXid(json);
     }
     @PostMapping("api/frecuencias/conductor")//idConductor
     public List<Servicio> getFrecuenciasXId(@RequestBody DtoJsonFrecuencia json){
-        System.out.println(json.getIdConductor());
         return servicioDaoImp.getFrecuenciasXid(json);
     }
     @GetMapping("api/multados/nombre/{nombre}")

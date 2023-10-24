@@ -17,7 +17,7 @@ async function cargarMultados(){
           for(let multado of multados){
                 cont=cont+1;
                 let botonAgregarMultas = '<a href="#" class="btn btn-primary" onclick="agregarMulta(' + multado[0] + ', \'' + multado[1] + '\',\'' + multado[2] + '\')">Agregar Multa</a>';
-                let botonVerMultas = '<a href="#" class="btn btn-warning" onclick="verMultas('+multado[0]+')">Ver Multas</a>';
+                let botonVerMultas = '<a href="#" class="btn btn-warning" onclick="verMultas('+multado[0]+', \'' + multado[2] + '\')">Ver Multas</a>';
                 let multadoHtml =  '<tr><td>'+cont+'</td><td>'+multado[1]+'</td><td>'+multado[2]+'</td><td>'+botonAgregarMultas+'</td><td>'+botonVerMultas+'</td></tr>';
                 listadoHtml+=multadoHtml;
           }
@@ -98,16 +98,17 @@ function agregarMulta(id,nombre,placa){
          });
          $('#formMulta').modal('hide');
  }
- function verMultas(id){
+ function verMultas(id,placa){
     // Convierte el ID y el nombre a cadenas de texto
         const idComoCadena = id.toString();
-
+        const placaCodificada = encodeURIComponent(placa);
         // Codifica los valores para asegurarte de que sean seguros en una URL
         const idCodificado = encodeURIComponent(idComoCadena);
 
         // Redirige a la página "listaLugares.html" con el ID y el nombre en la URL
-        window.location.href = `listaMultas.html?id=${idCodificado}`;
+        window.location.href = `listaMultas.html?id=${idCodificado}&placa=${placaCodificada}`;
  }
+
 function validarBusquedaConductor(){
     const nombreC = document.getElementById("txtBusquedaConductor").value.toString();
     const errorNombreConductor=document.getElementById("lblerrorBusquedaConductor");
@@ -135,7 +136,7 @@ async function buscarNombreCMultado(nombreC){
           for(let conductor of conductores){
                 cont=cont+1;
                 let botonAgregarMultas = '<a href="#" class="btn btn-primary" onclick="agregarMulta(' + conductor[0] + ', \'' + conductor[1] + '\',\'' + conductor[2] + '\')">Agregar Multa</a>';
-                let botonVerMultas = '<a href="#" class="btn btn-warning" onclick="verMultas('+conductor[0]+')">Ver Multas</a>';
+                let botonVerMultas = '<a href="#" class="btn btn-warning" onclick="verMultas('+conductor[0]+', \'' + conductor[2] + '\')">Ver Multas</a>';
                 let multadoHtml =  '<tr><td>'+cont+'</td><td>'+conductor[1]+'</td><td>'+conductor[2]+'</td><td>'+botonAgregarMultas+'</td><td>'+botonVerMultas+'</td></tr>';
                 listadoHtml+=multadoHtml;
           }

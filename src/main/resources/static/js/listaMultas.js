@@ -4,15 +4,20 @@ $(document).ready(function() {
 function obtenerIdDeUrl() {
      parametrosDeConsulta = new URLSearchParams(window.location.search);
      const id = parametrosDeConsulta.get('id');
-     return id;
+     const placa=parametrosDeConsulta.get('placa');
+     let json={};
+     json.idConductor=id;
+     json.placa=placa;
+     return json;
 }
- async function verMultas(idConductor){
-     const request = await fetch('api/multas/'+idConductor, {
-             method: 'GET',
+ async function verMultas(json){
+     const request = await fetch('api/multas/conductor', {
+             method: 'POST',
              headers: {
                'Accept': 'application/json',
                'Content-Type': 'application/json'
-             }
+             },
+             body: JSON.stringify(json)
      });
      const multas = await request.json();//realizar los cambio correcpondientes
      if(!multas || multas.length === 0){
@@ -21,15 +26,15 @@ function obtenerIdDeUrl() {
      }
 
      let listadoHtml = '';
-             let cont = 0;
-           for(let multa of multas){
-                 cont=cont+1;
-                 let botonEditar = '<a href="#" class="btn btn-warning" onclick="mostrarMultas('+multa.idServicio+')">Editar</a>';
-                 let botonEliminar = '<a href="#" class="btn btn-danger" onclick="eliminarMulta('+multa.idServicio+')">Eliminar</a>';
-                 let multaHtml =  '<tr><td>'+cont+'</td><td>'+multa.tipo+'</td><td>'+multa.costo+"Bs."+'</td><td>'+multa.fechaCreacion+'</td><td>'+botonEditar+'</td><td>'+botonEliminar+'</td></tr>';
-                 listadoHtml+=multaHtml;
-           }
-           document.querySelector('#listaMultas tbody').outerHTML=listadoHtml;
+     let cont = 0;
+    for(let multa of multas){
+         cont=cont+1;
+         let botonEditar = '<a href="#" class="btn btn-warning" onclick="mostrarMultas('+multa.idServicio+')">Editar</a>';
+         let botonEliminar = '<a href="#" class="btn btn-danger" onclick="eliminarMulta('+multa.idServicio+')">Eliminar</a>';
+         let multaHtml =  '<tr><td>'+cont+'</td><td>'+multa.tipo+'</td><td>'+multa.costo+"Bs."+'</td><td>'+multa.fechaCreacion+'</td><td>'+botonEditar+'</td><td>'+botonEliminar+'</td></tr>';
+         listadoHtml+=multaHtml;
+   }
+   document.querySelector('#listaMultas tbody').outerHTML=listadoHtml;
  }
 async function mostrarMultas(idSer){
     $('#modalMultaConductor').modal('show');
