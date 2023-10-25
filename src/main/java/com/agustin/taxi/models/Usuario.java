@@ -1,11 +1,13 @@
 package com.agustin.taxi.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Data
@@ -31,7 +33,9 @@ public class Usuario {
     @UpdateTimestamp
     @Column(name="fechaActualizacion")
     private LocalDateTime fechaActualizacion;
-
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "usuario")
+    private List<Pago> pagos;
     public Usuario() {
     }
 

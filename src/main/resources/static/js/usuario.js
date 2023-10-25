@@ -42,6 +42,7 @@ async function verificarYAsignarRol(){
             localStorage.email = login.correo;
             localStorage.rol = respuesta[1];
             localStorage.idConductor = respuesta[2];
+            localStorage.idUsuario = respuesta[3];
             if(respuesta[1]=='Admin'){
                 window.location.href = 'index.html';
             }else{

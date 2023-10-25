@@ -33,6 +33,7 @@ public class UsuarioController {
             String rol = usuarioLogeado.getRol();
             res.add(rol);
             res.add(usuarioLogeado.getIdConductor()+"");
+            res.add(usuarioLogeado.getIdUsuario()+"");
             return res;
         }
         return res;
