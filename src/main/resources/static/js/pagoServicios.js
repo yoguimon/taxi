@@ -250,9 +250,37 @@ async function pagarServicios(){
         },
         body: JSON.stringify(json)
       });
+      const response = await request.json();
+      const numero = parseInt(response);
+      localStorage.idPago=numero;
+
      $('#modalOk').modal('show');
 }
 async function generarPdf(){
     $('#modalOk').modal('hide');
-    //alert("generando reporte en pdf...");
+    const id = localStorage.getItem('idPago');
+    const request = await fetch('api/pagar/reporte/'+id, {
+        method: 'GET',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+      });
+      if (request.ok) {
+          const response = await request.blob();
+          const file = new Blob([response], { type: 'application/pdf' });
+          const fileURL = URL.createObjectURL(file);
+              window.open(fileURL, '_blank');
+              location.reload();
+      } else {
+          alert("fallo la generacion de reportes...");
+      }
+}
+function validarPago(){
+    if (serviciosAsignados.length===0) {
+        $("#modalOkError .modal-body").text("No se agrego servicios a la tabla!");
+        $('#modalOkError').modal('show');
+    }else{
+        pagarServicios();
+    }
 }
