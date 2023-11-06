@@ -63,7 +63,7 @@
             Interface
         </div>
 
-        <!-- Nav Item - Modulo Conductores -->
+        <!-- Nav Item - Pages Collapse Menu -->
         <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                aria-expanded="true" aria-controls="collapseTwo">
@@ -74,6 +74,7 @@
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Modulo Conductores:</h6>
                     <a class="collapse-item" href="ListaConductores.html">Lista Conductores</a>
+                    <a class="collapse-item" href="cards.html">Cards</a>
                 </div>
             </div>
         </li>
@@ -297,9 +298,58 @@
                     </div>
                 </div>
 
-
                 <!-- DataTales Example -->
                 <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary text-right">
+                            <div class="mb-2"><label id="lblerrorBusquedaConductor" class="ml-4" style="color: red;"></label></div>
+                            <a type="submit" class="btn btn-primary" onclick="cargarConductores()">Mostrar Conductores</a>
+                            Buscar Conductor:
+                            <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                                <div class="input-group">
+
+                                    <input type="text" id="txtBusquedaConductor" class="form-control bg-light border-0 small" placeholder="buscar por nombre..."
+                                           aria-label="Search" aria-describedby="basic-addon2">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-primary" type="button" onclick="validarBusquedaConductor()">
+                                            <i class="fas fa-search fa-sm"></i>
+                                        </button>
+
+                                    </div>
+
+                                </div>
+                            </form>
+                        </h6>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="listaConductores" width="100%" cellspacing="0">
+                                    <thead>
+                                    <tr>
+                                        <th>Nro</th>
+                                        <th>Nombre</th>
+                                        <th>Telefono</th>
+                                        <th>Nro Licencia</th>
+                                        <th>Ver Multas</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    </tbody>
+                                </table>
+                                <div id="divDatos" style="display:none">
+                                    <label style="display: inline;">Nombre:</label>
+                                    <h5 id="lblnombre" style="display: inline;">...</h5>
+                                    <br>
+                                    <label style="display: inline;">Nro Licencia:</label>
+                                    <h5 id="lblnrolicencia" style="display: inline;">...</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- DataTales Example -->
+                <div class="card shadow mb-4" id="divPagos">
                     <div class="card-header py-3">
                         <div class="d-flex justify-content-center">
                             <h6 class="m-2 font-weight-bold text-primary">
@@ -329,7 +379,7 @@
                     </div>
 
                 </div>
-                <div class="card shadow mb-4">
+                <div class="card shadow mb-4" id="divTotal">
                     <div class="card-header py-3">
                         <div class="d-flex justify-content-center">
                             <h6 class="m-2 font-weight-bold text-primary">Total:
@@ -402,7 +452,25 @@
         </div>
     </div>
 </div>
-
+<!-- Modal -->
+<div class="modal fade" id="modalOk" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalL">Mensaje</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Se registro el pago correctamente
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="generarPdf()">Ok</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 <!-- Bootstrap core JavaScript-->

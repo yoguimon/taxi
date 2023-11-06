@@ -38,11 +38,13 @@ async function verificarYAsignarRol(){
           });
         const respuesta = await request.json();
         if(respuesta.length!=0){
+            localStorage.clear();
             localStorage.token = respuesta[0];
             localStorage.email = login.correo;
             localStorage.rol = respuesta[1];
             localStorage.idConductor = respuesta[2];
             localStorage.idUsuario = respuesta[3];
+            localStorage.idPago = 0;
             if(respuesta[1]=='Admin'){
                 window.location.href = 'index.html';
             }else{

@@ -95,4 +95,12 @@ public class ConductorDaoImp implements CrudDao<Conductor>{
     }
 
 
+    public List<Conductor> getConductorXNombre(String nombre) {
+        String query = "SELECT idConductor,CONCAT(nombre,' ',primerApellido,' ',segundoApellido),telefono,numLicencia\n" +
+                "FROM conductor WHERE CONCAT(nombre,' ',primerApellido,' ',segundoApellido) LIKE :nombre AND estado=1;";
+        List<Conductor> resultado = entityManager.createNativeQuery(query)
+                .setParameter("nombre","%" + nombre + "%")
+                .getResultList();
+        return resultado;
+    }
 }

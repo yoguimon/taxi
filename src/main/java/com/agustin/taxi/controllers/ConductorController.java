@@ -4,6 +4,7 @@ import com.agustin.taxi.dao.ConductorDaoImp;
 import com.agustin.taxi.dto.DtoConductorVehiculo;
 import com.agustin.taxi.models.Conductor;
 import com.agustin.taxi.models.ConductorVehiculo;
+import com.agustin.taxi.models.Servicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,6 +29,10 @@ public class ConductorController {
     @GetMapping("api/conductores/{id}")
     public Conductor getConductor(@PathVariable Long id){
         return conductorDaoImp.getPersona(id);
+    }
+    @GetMapping("api/conductores/nombre/{nombre}")
+    public List<Conductor> getConductorXNombre(@PathVariable String nombre){
+        return conductorDaoImp.getConductorXNombre(nombre);
     }
     @PutMapping("api/conductores")
     public void setConductor(@RequestBody Conductor conductor){

@@ -2,6 +2,103 @@ let serviciosAsignados=[];
 let costosServicios=[];
 let total=0;
 let contador=1;
+let contAux=0;
+$(document).ready(function() {
+    ocultarMostrar('hidden','#divPagos');
+    ocultarMostrar('hidden','#divTotal');
+});
+async function cargarConductores(){
+    if(contAux>0){
+        limpiarTabla();
+    }
+    const request = await fetch('api/conductores',{
+        method: 'GET',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+    });
+    const conductores = await request.json();
+    let listadoHtml = '';
+            //para agragar usuarios de json
+        let cont = 0;
+      for(let conductor of conductores){
+            cont=cont+1;
+            let nombre = conductor[1]+' '+conductor[2]+' '+conductor[3]+"";
+            let botonPago = '<a class="btn btn-primary" id="btnHabilitar" onclick="habilitarPago('+conductor[0]+', \'' + nombre + '\', \'' + conductor[5] + '\')">Pagar Servicios</a>';
+            let conductorHtml =  '<tr id="'+conductor[0]+'"><td>'+cont+'</td><td>'+nombre+'</td><td>'+conductor[4]+'</td><td>'+conductor[5]+'</td><td>'+botonPago+'</td></tr>';
+            listadoHtml+=conductorHtml;
+      }
+      document.querySelector('#listaConductores tbody').outerHTML=listadoHtml;
+      contAux=contAux+1;
+}
+function validarBusquedaConductor(){
+    const nombreC = document.getElementById("txtBusquedaConductor").value.toString();
+    const errorNombreConductor=document.getElementById("lblerrorBusquedaConductor");
+    errorNombreConductor.innerHTML=validarNombreC(nombreC);
+    if(errorNombreConductor.innerHTML===''){
+        buscarNombreCMultado(nombreC);
+    }
+}
+async function buscarNombreCMultado(nombreC){
+    if(contAux>0){
+        limpiarTabla();
+    }
+    const request = await fetch('api/conductores/nombre/'+nombreC, {
+            method: 'GET',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            }
+    });
+    const conductores = await request.json();
+    if(conductores.length === 0){
+        document.getElementById("lblerrorBusquedaConductor").innerHTML="Nombre Incorrecto!";
+    }else{
+          document.getElementById("lblerrorBusquedaConductor").innerHTML="";
+          let listadoHtml = '';
+          let cont = 0;
+          for(let conductor of conductores){
+              cont=cont+1;
+              let botonPago = '<a class="btn btn-primary" id="btnHabilitar" onclick="habilitarPago('+conductor[0]+', \'' + conductor[1] + '\', \'' + conductor[3] + '\')">Pagar Servicios</a>';
+              let conductorHtml =  '<tr id="'+conductor[0]+'"><td>'+cont+'</td><td>'+conductor[1]+'</td><td>'+conductor[2]+'</td><td>'+conductor[3]+'</td><td>'+botonPago+'</td></tr>';
+              listadoHtml+=conductorHtml;
+          }
+          document.querySelector('#listaConductores tbody').outerHTML=listadoHtml;
+          contAux=contAux+1;
+    }
+}
+function habilitarPago(id,nombre,nrolicencia){
+    const tabla = document.getElementById('listaConductores');
+    tabla.style.display = 'none';
+    document.getElementById('lblnombre').textContent=nombre;
+    document.getElementById('lblnrolicencia').textContent=nrolicencia;
+    const divDatos = document.getElementById('divDatos');
+    divDatos.style.display='block';
+    localStorage.idPago=id;
+    ocultarMostrar('visible','#divPagos');
+    ocultarMostrar('visible','#divTotal');
+}
+function ocultarMostrar(opcion,ruta){
+    var etiqueta = document.querySelector(ruta);
+    etiqueta.style.visibility  = opcion;
+}
+function limpiarTabla(){
+    var id = localStorage.getItem('idPago');
+    ocultarMostrar('hidden','#divPagos');
+    ocultarMostrar('hidden','#divTotal');
+    document.getElementById('total').innerHTML='0';
+    const table = document.getElementById('tablaPreAsignacion');
+    const rowCount = table.rows.length;
+
+    for (let i = rowCount - 1; i > 0; i--) {
+      table.deleteRow(i);
+    }
+    const tabla = document.getElementById('listaConductores');
+    tabla.style.display = 'table';
+    const divDatos = document.getElementById('divDatos');
+    divDatos.style.display='none';
+}
 function mostrarMultasXId(){
     $("#modalServicios .modal-title").text("Lista multas adeudadas por el conductor:");
     $('#modalServicios').modal('show');
@@ -13,7 +110,7 @@ function mostrarFrecuenciasXId(){
     cargarFrecuenciasAsignacion();
 }
 async function cargarFrecuenciasAsignacion(){
-    var id = localStorage.getItem('idConductor');
+    var id = localStorage.getItem('idPago');
     const request = await fetch('api/frecuencias/pagar/'+id,{
             method: 'GET',
             headers: {
@@ -53,7 +150,7 @@ async function cargarFrecuenciasAsignacion(){
           }
 }
 async function cargarMultasAsignacion(){
-    var id = localStorage.getItem('idConductor');
+    var id = localStorage.getItem('idPago');
     const request = await fetch('api/multas/pagar/'+id,{
             method: 'GET',
             headers: {
@@ -138,7 +235,7 @@ function eliminarFila(idServicio,nombre,costo) {
 }
 async function pagarServicios(){
     let json = {
-        idConductor:localStorage.getItem('idConductor'),
+        idConductor:localStorage.getItem('idPago'),
         idUsuario:localStorage.getItem('idUsuario'),
         servicios:serviciosAsignados,
         costos:costosServicios,
@@ -153,5 +250,9 @@ async function pagarServicios(){
         },
         body: JSON.stringify(json)
       });
-     alert("se guardo pago");
+     $('#modalOk').modal('show');
+}
+async function generarPdf(){
+    $('#modalOk').modal('hide');
+    //alert("generando reporte en pdf...");
 }
