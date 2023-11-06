@@ -101,10 +101,11 @@ async function agregarFrecuenciaABD(id,placa,costo,fechaInicio,fechaFin){
     frecuencia.idConductor=id;
     frecuencia.nombre='frecuencia';
     frecuencia.costo=costo;
-    if(costo===70){
+    if(parseInt(costo)===70){
         frecuencia.tipo='frecuencia semanal';
+    }else{
+        frecuencia.tipo='frecuencia diaria';
     }
-    frecuencia.tipo='frecuencia diaria';
     frecuencia.placa=placa;
     frecuencia.fechaInicio=new Date(fechaInicio).toISOString().split('T')[0];
     frecuencia.fechaFin=new Date(fechaFin).toISOString().split('T')[0];
