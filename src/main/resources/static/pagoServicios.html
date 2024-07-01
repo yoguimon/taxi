@@ -40,7 +40,7 @@
         <!-- Sidebar - Brand -->
         <a class="sidebar-brand d-flex align-items-center justify-content-center" href="indexConductor.html">
             <div class="sidebar-brand-icon rotate-n-15">
-                <i class="fas fa-laugh-wink"></i>
+                <i class="fas fa-taxi"></i>
             </div>
             <div class="sidebar-brand-text mx-3">Taxi Web</div>
         </a>
@@ -74,7 +74,6 @@
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Modulo Conductores:</h6>
                     <a class="collapse-item" href="ListaConductores.html">Lista Conductores</a>
-                    <a class="collapse-item" href="cards.html">Cards</a>
                 </div>
             </div>
         </li>
@@ -207,6 +206,7 @@
                 <!-- Page Heading -->
                 <h1 class="h3 mb-2 text-gray-800">Pago de Servicios</h1>
                 <p class="mb-4">pagar servicios adeudados</p>
+                <p class="text-primary">(Debes escoger un conductor y posteriormente seleccionar sus multas y frecuencias a pagar)</p>
 
                 <!-- Modal -->
                 <div class="modal fade" id="formEliminar" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -301,7 +301,7 @@
                 <!-- DataTales Example -->
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary text-right">
+                        <h6 class="m-0 font-weight-bold text-primary text-center">
                             <div class="mb-2"><label id="lblerrorBusquedaConductor" class="ml-4" style="color: red;"></label></div>
                             <a type="submit" class="btn btn-primary" onclick="cargarConductores()">Mostrar Conductores</a>
                             Buscar Conductor:

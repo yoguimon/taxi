@@ -1,6 +1,5 @@
 $(document).ready(function() {
     cargarVehiculos(obtenerIdDeUrl());
-    $('#listaVehiculos').DataTable();
   });
 async function cargarVehiculos(id){
     const request = await fetch('api/conductores/vehiculos/'+id, {
@@ -17,8 +16,8 @@ async function cargarVehiculos(id){
             let cont = 0;
           for(let vehiculo of vehiculos){
                 cont=cont+1;
-                let botonEditar = '<a href="#" class="btn btn-warning" onclick="mostrarVehiculo('+vehiculo[0]+')">Editar</a>';
-                let botonEliminar = '<a href="#" class="btn btn-danger" onclick="eliminarVehiculo('+vehiculo[0]+')">Eliminar</a>';
+                let botonEditar = '<div class="text-center"><a href="#" class="btn btn-primary btn-sm" onclick="mostrarVehiculo('+vehiculo[0]+')"><i class="fas fa-edit"></i></a></div>';
+                let botonEliminar = '<div class="text-center"><a href="#" class="btn btn-primary btn-sm" onclick="eliminarVehiculo('+vehiculo[0]+')"><i class="fas fa-trash"></i></a></div>';
                 let vehiculoHtml =  '<tr><td>'+cont+'</td><td>'+vehiculo[2]+'</td><td>'+vehiculo[3]+'</td><td>'+vehiculo[4]+'</td><td>'+vehiculo[5]+'</td><td>'+botonEditar+'</td><td>'+botonEliminar+'</td></tr>';
                 listadoHtml+=vehiculoHtml;
           }

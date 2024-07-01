@@ -31,7 +31,7 @@ function obtenerIdDeUrl() {
      for(let frecuencia of frecuencias){
          cont=cont+1;
          fecha=frecuencia.fechaInicio+" a "+frecuencia.fechaFin;
-         let botonEliminar = '<a href="#" class="btn btn-danger" onclick="eliminarFrecuencia('+frecuencia.idServicio+')">Eliminar</a>';
+         let botonEliminar = '<a href="#" class="btn btn-primary btn-sm" onclick="eliminarFrecuencia('+frecuencia.idServicio+')"><i class="fas fa-trash"></i></a>';
          let frecuenciaHtml =  '<tr><td>'+cont+'</td><td>'+frecuencia.tipo+'</td><td>'+frecuencia.costo+"Bs."+'</td><td>'+fecha+'</td><td>'+botonEliminar+'</td></tr>';
          listadoHtml+=frecuenciaHtml;
    }

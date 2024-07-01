@@ -16,8 +16,8 @@ async function cargarConductoresFrecuencia(){
             let cont = 0;
           for(let conductor of conductores){
                 cont=cont+1;
-                let botonAgregarFrecuencia = '<a href="#" class="btn btn-primary" onclick="agregarFrecuencia(' + conductor[0] + ', \'' + conductor[1] + '\',\'' + conductor[2] + '\')">Agregar Frecuencia</a>';
-                let botonVerFrecuencias = '<a href="#" class="btn btn-warning" onclick="verFrecuencias('+conductor[0]+', \'' + conductor[2] + '\')">Ver Frecuencias</a>';
+                let botonAgregarFrecuencia = '<a href="#" class="btn btn-primary" onclick="agregarFrecuencia(' + conductor[0] + ', \'' + conductor[1] + '\',\'' + conductor[2] + '\')"><i class="fas fa-plus"></i>  Frecuencia</a>';
+                let botonVerFrecuencias = '<a href="#" class="btn btn-primary" onclick="verFrecuencias('+conductor[0]+', \'' + conductor[2] + '\')"><i class="fas fa-eye"></i>  Frecuencias</a>';
                 let conductorHtml =  '<tr><td>'+cont+'</td><td>'+conductor[1]+'</td><td>'+conductor[2]+'</td><td>'+botonAgregarFrecuencia+'</td><td>'+botonVerFrecuencias+'</td></tr>';
                 listadoHtml+=conductorHtml;
           }

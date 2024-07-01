@@ -22,7 +22,7 @@ public class ServicioDaoImp {
         String query = "SELECT C.idConductor,CONCAT(C.nombre,' ',C.primerApellido,' ',C.segundoApellido),V.placa\n" +
                 "FROM conductor C \n" +
                 "\tINNER JOIN vehiculo V ON C.idConductor=V.idConductor\n" +
-                "WHERE C.estado=1;";
+                "WHERE V.estado=1;";
         List<ConductorAux> resultado = entityManager.createNativeQuery(query).getResultList();
         return resultado;
     }

@@ -37,8 +37,14 @@ public class VehiculoDaoImp implements CrudDao<Vehiculo>{
     }
 
     @Override
-    public void modificar(Vehiculo vehiculo) {
-        entityManager.merge(vehiculo);
+    public void modificar(Vehiculo nuevo) {
+        //entityManager.merge(vehiculo);
+        Vehiculo viejo = entityManager.find(Vehiculo.class,nuevo.getIdVehiculo());
+        viejo.setPlaca(nuevo.getPlaca());
+        viejo.setMarca(nuevo.getMarca());
+        viejo.setColor(nuevo.getColor());
+        viejo.setTipo(nuevo.getTipo());
+        entityManager.merge(viejo);
     }
 
     public void crearVehiculo(DtoVehiculo request) {

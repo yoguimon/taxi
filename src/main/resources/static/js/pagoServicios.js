@@ -204,7 +204,7 @@ function agregarATabla(idServicio, nombre, tipo, costo, fecha) {
         newCell2.innerHTML = tipo;
         newCell3.innerHTML = fecha;
         newCell4.innerHTML=costo;
-        newCell5.innerHTML='<button class="btn btn-danger" onclick="eliminarFila(' + idServicio + ', \'' + nombre + '\', \'' + costo + '\')">Quitar</button>';
+        newCell5.innerHTML='<button class="btn btn-primary" onclick="eliminarFila(' + idServicio + ', \'' + nombre + '\', \'' + costo + '\')">⛌</button>';
 
         // Eliminar del listado de multas
        let checkbox = document.querySelector('input[name="opciones"][value="' + idServicio + '"]');

@@ -16,8 +16,8 @@ async function cargarMultados(){
             let cont = 0;
           for(let multado of multados){
                 cont=cont+1;
-                let botonAgregarMultas = '<a href="#" class="btn btn-primary" onclick="agregarMulta(' + multado[0] + ', \'' + multado[1] + '\',\'' + multado[2] + '\')">Agregar Multa</a>';
-                let botonVerMultas = '<a href="#" class="btn btn-warning" onclick="verMultas('+multado[0]+', \'' + multado[2] + '\')">Ver Multas</a>';
+                let botonAgregarMultas = '<a href="#" class="btn btn-primary" onclick="agregarMulta(' + multado[0] + ', \'' + multado[1] + '\',\'' + multado[2] + '\')"><i class="fas fa-plus"></i> Multa</a>';
+                let botonVerMultas = '<a href="#" class="btn btn-primary" onclick="verMultas('+multado[0]+', \'' + multado[2] + '\')"><i class="fas fa-eye"></i> Multas</a>';
                 let multadoHtml =  '<tr><td>'+cont+'</td><td>'+multado[1]+'</td><td>'+multado[2]+'</td><td>'+botonAgregarMultas+'</td><td>'+botonVerMultas+'</td></tr>';
                 listadoHtml+=multadoHtml;
           }

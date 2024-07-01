@@ -1,6 +1,5 @@
 $(document).ready(function() {
     cargarConductores();
-    $('#listaConductores').DataTable();
   });
   async function cargarConductores(){
     const request = await fetch('api/conductores', {
@@ -17,10 +16,10 @@ $(document).ready(function() {
             let cont = 0;
           for(let conductor of conductores){
                 cont=cont+1;
-                let botonVehiculos = '<a href="#" class="btn btn-primary" onclick="mostrarVehiculos('+conductor[0]+')">Vehiculos</a>';
-                let botonEditar = '<a href="#" class="btn btn-warning" onclick="mostrarConductor('+conductor[0]+')">Editar</a>';
-                let botonEliminar = '<a href="#" class="btn btn-danger" onclick="eliminarConductor('+conductor[0]+')">Eliminar</a>';
-                let conductorHtml =  '<tr><td>'+cont+'</td><td>'+conductor[1]+'</td><td>'+conductor[2]+'</td><td>'+conductor[3]+'</td><td>'+conductor[4]+'</td><td>'+conductor[5]+'</td><td>'+botonVehiculos+'</td><td>'+botonEditar+'</td><td>'+botonEliminar+'</td></tr>';
+                let botonVehiculos = '<a href="#" class="btn btn-primary btn-sm" onclick="mostrarVehiculos('+conductor[0]+')"><i class="fas fa-car"></i></a>';
+                let botonEditar = '<a href="#" class="btn btn-primary btn-sm" onclick="mostrarConductor('+conductor[0]+')"><i class="fas fa-edit"></i></a>';
+                let botonEliminar = '<a href="#" class="btn btn-primary btn-sm" onclick="eliminarConductor('+conductor[0]+')"><i class="fas fa-trash"></i></a>';
+                let conductorHtml =  '<tr><td>'+cont+'</td><td>'+conductor[1]+'</td><td>'+conductor[2]+'</td><td>'+conductor[3]+'</td><td>'+conductor[4]+'</td><td>'+conductor[5]+'</td><td><div class="text-center">'+botonVehiculos+'</div></td><td><div class="text-center">'+botonEditar+'</div></td><td><div class="text-center">'+botonEliminar+'</div></td></tr>';
                 listadoHtml+=conductorHtml;
           }
           document.querySelector('#listaConductores tbody').outerHTML=listadoHtml;
