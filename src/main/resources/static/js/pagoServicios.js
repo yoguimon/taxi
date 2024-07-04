@@ -233,6 +233,24 @@ function eliminarFila(idServicio,nombre,costo) {
     console.log(serviciosAsignados);
     console.log(costosServicios);
 }
+function mostrarAlertaPago(){
+    Swal.fire({
+        title: "Pagar Servicios",
+        text: "Esta seguro de registrar el Pago?",
+        icon: "warning",
+        iconColor: "#4C71DE",
+        showCancelButton: true,
+        cancelButtonText: "No",
+        confirmButtonColor: "#4C71DE",
+        cancelButtonColor: "#4C71DE",
+        confirmButtonText: "Si"
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+            await pagarServicios(); // Llamar a la función generarPdf después de confirmar
+        }
+      });
+}
+
 async function pagarServicios(){
     let json = {
         idConductor:localStorage.getItem('idPago'),
@@ -254,10 +272,12 @@ async function pagarServicios(){
       const numero = parseInt(response);
       localStorage.idPago=numero;
 
-     $('#modalOk').modal('show');
+      generarPdf();
+
+    // $('#modalOk').modal('show');
 }
 async function generarPdf(){
-    $('#modalOk').modal('hide');
+    //$('#modalOk').modal('hide');
     const id = localStorage.getItem('idPago');
     const request = await fetch('api/pagar/reporte/'+id, {
         method: 'GET',
@@ -281,6 +301,6 @@ function validarPago(){
         $("#modalOkError .modal-body").text("No se agrego servicios a la tabla!");
         $('#modalOkError').modal('show');
     }else{
-        pagarServicios();
+        mostrarAlertaPago();
     }
 }

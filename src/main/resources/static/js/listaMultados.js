@@ -135,8 +135,8 @@ async function buscarNombreCMultado(nombreC){
             let cont = 0;
           for(let conductor of conductores){
                 cont=cont+1;
-                let botonAgregarMultas = '<a href="#" class="btn btn-primary" onclick="agregarMulta(' + conductor[0] + ', \'' + conductor[1] + '\',\'' + conductor[2] + '\')">Agregar Multa</a>';
-                let botonVerMultas = '<a href="#" class="btn btn-warning" onclick="verMultas('+conductor[0]+', \'' + conductor[2] + '\')">Ver Multas</a>';
+                let botonAgregarMultas = '<a href="#" class="btn btn-primary" onclick="agregarMulta(' + conductor[0] + ', \'' + conductor[1] + '\',\'' + conductor[2] + '\')"><i class="fas fa-plus"></i> Multa</a>';
+                let botonVerMultas = '<a href="#" class="btn btn-primary" onclick="verMultas('+conductor[0]+', \'' + conductor[2] + '\')"><i class="fas fa-eye"></i> Multas</a>';
                 let multadoHtml =  '<tr><td>'+cont+'</td><td>'+conductor[1]+'</td><td>'+conductor[2]+'</td><td>'+botonAgregarMultas+'</td><td>'+botonVerMultas+'</td></tr>';
                 listadoHtml+=multadoHtml;
           }

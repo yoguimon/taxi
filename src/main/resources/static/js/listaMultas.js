@@ -29,9 +29,10 @@ function obtenerIdDeUrl() {
      let cont = 0;
     for(let multa of multas){
          cont=cont+1;
-         let botonEditar = '<a href="#" class="btn btn-warning" onclick="mostrarMultas('+multa.idServicio+')">Editar</a>';
-         let botonEliminar = '<a href="#" class="btn btn-danger" onclick="eliminarMulta('+multa.idServicio+')">Eliminar</a>';
-         let multaHtml =  '<tr><td>'+cont+'</td><td>'+multa.tipo+'</td><td>'+multa.costo+"Bs."+'</td><td>'+multa.fechaCreacion+'</td><td>'+botonEditar+'</td><td>'+botonEliminar+'</td></tr>';
+         var fechahora = multa.fechaCreacion.split('T');
+         let botonEditar = '<a href="#" class="btn btn-primary btn-sm" onclick="mostrarMultas('+multa.idServicio+')"><i class="fas fa-edit"></i></a>';
+         let botonEliminar = '<a href="#" class="btn btn-primary btn-sm" onclick="eliminarMulta('+multa.idServicio+')"><i class="fas fa-trash"></i></a>';
+         let multaHtml =  '<tr><td>'+cont+'</td><td>'+multa.tipo+'</td><td>'+multa.costo+"Bs."+'</td><td>'+fechahora[0]+' | '+fechahora[1]+'</td><td>'+botonEditar+'</td><td>'+botonEliminar+'</td></tr>';
          listadoHtml+=multaHtml;
    }
    document.querySelector('#listaMultas tbody').outerHTML=listadoHtml;
@@ -135,7 +136,7 @@ async function editarMulta(multa){
                         body: JSON.stringify(multa)
     });
     $('#modalMultaConductor').modal('hide');
-    verMultas(obtenerIdDeUrl());
+    location.reload();
 }
 async function eliminarMulta(id){
     $('#formEliminar').modal('show');
@@ -148,6 +149,6 @@ async function eliminarMulta(id){
             }
         });
         $('#formEliminar').modal('hide');
-        verMultas(obtenerIdDeUrl());
+        location.reload();
     });
 }
