@@ -17,7 +17,7 @@ async function cargarMultasPendientes(){
             let cont = 0;
           for(let multa of multas){
                 cont=cont+1;
-                let multaHtml =  '<tr><td>'+cont+'</td><td>'+multa.tipo+'</td><td>'+multa.costo+'</td><td>'+multa.fechaCreacion+'</td></tr>';
+                let multaHtml =  '<tr><td>'+cont+'</td><td>'+multa.tipo+'</td><td>'+multa.placa+'</td><td>'+multa.costo+'</td><td>'+multa.fechaCreacion+'</td></tr>';
                 listadoHtml+=multaHtml;
           }
           document.querySelector('#listaMultasPendientes tbody').outerHTML=listadoHtml;

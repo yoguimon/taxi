@@ -91,6 +91,19 @@
         </div>
       </div>
     </li>
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTT"
+         aria-expanded="true" aria-controls="collapseTwo">
+        <i class="fas fa-fw fa-cog"></i>
+        <span>Pagar Servicios</span>
+      </a>
+      <div id="collapseTT" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+          <h6 class="collapse-header">Modulo Servicios:</h6>
+          <a class="collapse-item" href="pagarServiciosConductor.html">Pagar servicios</a>
+        </div>
+      </div>
+    </li>
     <!-- Divider -->
     <hr class="sidebar-divider">
 
@@ -175,7 +188,7 @@
 
         <!-- Page Heading -->
         <h1 class="h3 mb-2 text-gray-800">Todas las multas pendientes a Pagar:</h1>
-        <p class="mb-4" id="mensaje">...</p>
+        <p class="mb-4" id="mensaje">El Conductor solo puede ver las multas que tiene, puede pagarlas en el modulo pagar servicios</p>
 
 
         <!-- DataTales Example -->
@@ -189,9 +202,10 @@
                   <thead>
                   <tr>
                     <th>Nro</th>
-                    <th>tipo de Multa</th>
-                    <th>Costo</th>
-                    <th>Fecha Multa</th>
+                    <th>Tipo de Multa</th>
+                    <th>Placa del Vehiculo</th>
+                    <th>Costo de la Multa <span class="text-primary">(Bs.)</span></th>
+                    <th>Fecha de la Multa</th>
                   </tr>
                   </thead>
                   <tbody>
@@ -214,7 +228,7 @@
     <footer class="sticky-footer bg-white">
       <div class="container my-auto">
         <div class="copyright text-center my-auto">
-          <span>Copyright &copy; Agustin 2023</span>
+          <span>Copyright &copy; Jhonny 2024</span>
         </div>
       </div>
     </footer>

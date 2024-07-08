@@ -54,7 +54,7 @@ public class ServicioDaoImp {
         String query = "SELECT C.idConductor,CONCAT(C.nombre,' ',C.primerApellido,' ',C.segundoApellido),V.placa\n" +
                 "FROM conductor C \n" +
                 "\tINNER JOIN vehiculo V ON C.idConductor=V.idConductor\n" +
-                "WHERE CONCAT(C.nombre,' ',C.primerApellido,' ',C.segundoApellido) LIKE :nombre AND C.estado=1";
+                "WHERE CONCAT(C.nombre,' ',C.primerApellido,' ',C.segundoApellido) LIKE :nombre AND V.estado=1";
         List<Servicio> resultado = entityManager.createNativeQuery(query)
                 .setParameter("nombre","%" + nombre + "%")
                 .getResultList();

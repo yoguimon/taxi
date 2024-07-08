@@ -63,62 +63,48 @@
       Interface
     </div>
 
-    <!-- Nav Item - Modulo Conductores -->
+    <!-- Modulo multas -->
     <li class="nav-item">
       <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
          aria-expanded="true" aria-controls="collapseTwo">
         <i class="fas fa-fw fa-cog"></i>
-        <span>Conductores</span>
+        <span>Multas</span>
       </a>
       <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
-          <h6 class="collapse-header">Modulo Conductores:</h6>
-          <a class="collapse-item" href="ListaConductores.html">Lista Conductores</a>
-        </div>
-      </div>
-    </li>
-    <!-- Nav Item - Modulo Multass -->
-    <li class="nav-item">
-      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTw"
-         aria-expanded="true" aria-controls="collapseTwo">
-        <i class="fas fa-fw fa-cog"></i>
-        <span>Multas</span>
-      </a>
-      <div id="collapseTw" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-        <div class="bg-white py-2 collapse-inner rounded">
           <h6 class="collapse-header">Modulo Multas:</h6>
-          <a class="collapse-item active" href="listaMultados.html">Multas</a>
+          <a class="collapse-item" href="listaMultasPendientes.html">Lista Multas a Pagar:</a>
         </div>
       </div>
     </li>
-    <!-- Nav Item - Modulo Frecuencia -->
+    <!-- Modulo Frecuencias -->
     <li class="nav-item">
-      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFre"
+      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseT"
          aria-expanded="true" aria-controls="collapseTwo">
         <i class="fas fa-fw fa-cog"></i>
         <span>Frecuencias</span>
       </a>
-      <div id="collapseFre" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+      <div id="collapseT" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
           <h6 class="collapse-header">Modulo Frecuencias:</h6>
-          <a class="collapse-item" href="listaFrecuencias.html">Frecuencias</a>
+          <a class="collapse-item" href="listaFrecuenciasPendientes.html">Lista Frecuencias a Pagar:</a>
         </div>
       </div>
     </li>
-    <!-- Modulo Pago servicios -->
     <li class="nav-item">
-      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collaps"
+      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTT"
          aria-expanded="true" aria-controls="collapseTwo">
         <i class="fas fa-fw fa-cog"></i>
-        <span>Pago Servicios</span>
+        <span>Pagar Servicios</span>
       </a>
-      <div id="collaps" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+      <div id="collapseTT" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
-          <h6 class="collapse-header">Modulo pago servicios:</h6>
-          <a class="collapse-item" href="pagoServicios.html">Pagar servicios</a>
+          <h6 class="collapse-header">Modulo Servicios:</h6>
+          <a class="collapse-item active" href="pagarServiciosConductor.html">Pagar servicios</a>
         </div>
       </div>
     </li>
+
 
     <!-- Divider -->
     <hr class="sidebar-divider">
@@ -171,7 +157,7 @@
           <li class="nav-item dropdown no-arrow">
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <span class="mr-2 d-none d-lg-inline text-gray-600 small" id="txtEmailUser"></span>
+              <span class="mr-2 d-none d-lg-inline text-gray-600 small" id="txtEmailUser">Douglas McGee</span>
               <img class="img-profile rounded-circle"
                    src="img/undraw_profile.svg">
             </a>
@@ -203,8 +189,9 @@
       <div class="container-fluid">
 
         <!-- Page Heading -->
-        <h1 class="h3 mb-2 text-gray-800">Multas</h1>
-        <p class="text-primary">(Puedes Listar Los conductores o Buscar uno en especifico, para poder agregar o ver sus multas)</p>
+        <h1 class="h3 mb-2 text-gray-800">Pago de Servicios</h1>
+        <p class="mb-4">El Conductor solo puede pagar sus Servicios adeudados de todos sus Vehiculos registrados</p>
+        <p class="text-primary">(Debes seleccionar multas y frecuencias a pagar)</p>
 
         <!-- Modal -->
         <div class="modal fade" id="formEliminar" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -296,45 +283,61 @@
           </div>
         </div>
 
-
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
           <div class="card-header py-3">
-            <h6 class="font-weight-bold text-primary text-center">
-              <div class="mb-2"><label id="lblerrorBusquedaConductor" class="ml-4" style="color: red;"></label></div>
-              <a type="submit" class="btn btn-primary" onclick="verTodosLosMultados()">Listar Conductores</a>
-              Buscar Conductor:
-              <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                <div class="input-group">
-
-                  <input type="text" id="txtBusquedaConductor" class="form-control bg-light border-0 small" placeholder="buscar por nombre..."
-                         aria-label="Search" aria-describedby="basic-addon2">
-                  <div class="input-group-append">
-                    <button class="btn btn-primary" type="button" onclick="validarBusquedaConductor()">
-                      <i class="fas fa-search fa-sm"></i>
-                    </button>
-
-                  </div>
-
-                </div>
-              </form>
-            </h6>
             <div class="card-body">
               <div class="table-responsive">
-                <table class="table table-bordered" id="listaMultados" width="100%" cellspacing="0">
+                <div id="divDatos">
+                  <label style="display: inline;">Nombre:</label>
+                  <h5 id="lblnombre" style="display: inline;">...</h5>
+                  <br>
+                  <label style="display: inline;">Nro Licencia:</label>
+                  <h5 id="lblnrolicencia" style="display: inline;">...</h5>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <!-- DataTales Example -->
+        <div class="card shadow mb-4" id="divPagos">
+          <div class="card-header py-3">
+            <div class="d-flex justify-content-center">
+              <h6 class="m-2 font-weight-bold text-primary">
+                <a type="submit" class="btn btn-primary mx-3" onclick="mostrarMultasXId()">+ agregar multas</a>
+                <a type="submit" class="btn btn-primary mx-3" onclick="mostrarFrecuenciasXId()">+ agregar frecuencias</a>
+              </h6>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-bordered" id="tablaPreAsignacion" width="100%" cellspacing="0">
                   <thead>
                   <tr>
                     <th>Nro</th>
-                    <th>Nombre</th>
-                    <th>Placa</th>
-                    <th>Agregar Multa</th>
-                    <th>Ver Multas</th>
+                    <th>Servicio</th>
+                    <th>Descripcion</th>
+                    <th>Fecha</th>
+                    <th>Costo</th>
+                    <th>Eliminar</th>
                   </tr>
                   </thead>
                   <tbody>
 
                   </tbody>
                 </table>
+
+                <div class="d-flex justify-content-center mt-5">
+                  <h6 class="m-2 font-weight-bold text-primary">Total:
+                    <h3 id="total">0</h3>
+                  </h6>
+                </div>
+                <div class="d-flex justify-content-center">
+                  <h6 class="m-2 font-weight-bold text-primary">
+                    <a type="submit" class="btn btn-primary btn-block mx-3" onclick="validarPago()">Generar Qr de Pago</a>
+                  </h6>
+                </div>
+
               </div>
             </div>
           </div>
@@ -362,7 +365,80 @@
 
 </div>
 <!-- End of Page Wrapper -->
+<!-- Modal Pago Servicios-->
+<div class="modal fade" id="modalServicios" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title fs-5">...</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="table-responsive">
+          <table class="table table-bordered" id="listaServiciosAdeudados" width="100%" cellspacing="0">
+            <thead>
+            <tr>
+              <th>Nro</th>
+              <th>Servicio</th>
+              <th>Descripcion</th>
+              <th>Fecha</th>
+              <th>Costo</th>
+              <th>Agregar</th>
+            </tr>
+            </thead>
+            <tbody>
 
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="modalOk" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalL">Mensaje</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Registro de pago existoso.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" onclick="generarPdf()">Ok</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="modalOkError" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModal">Error</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 <!-- Bootstrap core JavaScript-->
@@ -374,9 +450,10 @@
 
 <!-- Custom scripts for all pages-->
 <script src="js/sb-admin-2.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="js/control.js"></script>
 <script src="js/validaciones.js"></script>
-<script src="js/listaMultados.js"></script>
+<script src="js/pagoServiciosConductor.js"></script>
 
 </body>
 

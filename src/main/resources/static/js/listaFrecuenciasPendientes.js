@@ -23,7 +23,7 @@ async function cargarFrecuenciasPendientes(){
                 }else{
                     fecha=frecuencia.fechaInicio;
                 }
-                let frecuenciaHtml =  '<tr><td>'+cont+'</td><td>'+frecuencia.tipo+'</td><td>'+frecuencia.costo+'</td><td>'+fecha+'</td></tr>';
+                let frecuenciaHtml =  '<tr><td>'+cont+'</td><td>'+frecuencia.tipo+'</td><td>'+frecuencia.placa+'</td><td>'+frecuencia.costo+'</td><td>'+fecha+'</td></tr>';
                 listadoHtml+=frecuenciaHtml;
           }
           document.querySelector('#listaFrecuenciasPendientes tbody').outerHTML=listadoHtml;
