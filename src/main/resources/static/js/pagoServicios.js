@@ -4,8 +4,11 @@ let total=0;
 let contador=1;
 let contAux=0;
 $(document).ready(function() {
-    ocultarMostrar('hidden','#divPagos');
-    ocultarMostrar('hidden','#divTotal');
+    let rol = localStorage.getItem("rol");
+    if(rol==="Admin"){
+        ocultarMostrar('hidden','#divPagos');
+        ocultarMostrar('hidden','#divTotal');
+    }
 });
 async function cargarConductores(){
     if(contAux>0){
@@ -215,8 +218,6 @@ function agregarATabla(idServicio, nombre, tipo, costo, fecha) {
         contador=contador+1;
         serviciosAsignados.push(idServicio);
         costosServicios.push(costo);
-        console.log(serviciosAsignados);
-        console.log(costosServicios);
 
     }
 }
@@ -224,14 +225,11 @@ function eliminarFila(idServicio,nombre,costo) {
     let tablaPreAsignacion = document.getElementById('tablaPreAsignacion');
     total=total-parseInt(costo);
     document.getElementById('total').innerHTML=total;
-    console.log(total);
 
     let index = serviciosAsignados.indexOf(idServicio);
     tablaPreAsignacion.deleteRow(index + 1); // Se suma 1 porque el encabezado de la tabla se considera una fila
     serviciosAsignados.splice(index, 1);
     costosServicios.splice(index, 1);
-    console.log(serviciosAsignados);
-    console.log(costosServicios);
 }
 function mostrarAlertaPago(){
     Swal.fire({
@@ -298,8 +296,15 @@ async function generarPdf(){
 }
 function validarPago(){
     if (serviciosAsignados.length===0) {
-        $("#modalOkError .modal-body").text("No se agrego servicios a la tabla!");
-        $('#modalOkError').modal('show');
+        //$("#modalOkError .modal-body").text("No se agrego servicios a la tabla!");
+        //$('#modalOkError').modal('show');
+        Swal.fire({
+          title: "Error",
+          text: "Debes ingresar al menos un servicio a la tabla para Pagar!",
+          icon: "error",
+          iconColor: "#365CCD",
+          confirmButtonColor: "#365CCD"
+        });
     }else{
         mostrarAlertaPago();
     }

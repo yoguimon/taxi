@@ -1,3 +1,13 @@
+function usuarioAdmin(){
+    document.getElementById('txtEmail').value="rosario@gmail.com";
+    document.getElementById('txtPassword').value="Rosario23@";
+}
+
+function usuarioConductor(){
+    document.getElementById('txtEmail').value="jhoninformatic4@gmail.com";
+    document.getElementById('txtPassword').value="Jhonny23@";
+}
+
 async function iniciarSesion(email,pass){
     let datos = {};
     datos.correo = email;
