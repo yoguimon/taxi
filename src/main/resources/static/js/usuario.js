@@ -1,11 +1,11 @@
 function usuarioAdmin(){
     document.getElementById('txtEmail').value="rosario@gmail.com";
-    document.getElementById('txtPassword').value="Rosario23@";
+    document.getElementById('txtPassword').value="Rosario24@";
 }
 
 function usuarioConductor(){
     document.getElementById('txtEmail').value="jhoninformatic4@gmail.com";
-    document.getElementById('txtPassword').value="Jhonny23@";
+    document.getElementById('txtPassword').value="Jhonny24@";
 }
 
 async function iniciarSesion(email,pass){
@@ -29,8 +29,13 @@ async function iniciarSesion(email,pass){
             }else if(answer=='viejo'){
                 verificarYAsignarRol();
             }else{
-                //mostrarAlerta();
-                alert("ocurrio un error");
+                Swal.fire({
+                  title: "Error",
+                  text: "ocurrio un error!",
+                  icon: "error",
+                  iconColor: "#365CCD",
+                  confirmButtonColor: "#365CCD"
+                });
             }
 }
 async function verificarYAsignarRol(){
@@ -61,13 +66,23 @@ async function verificarYAsignarRol(){
                 if(respuesta[1]=='Conductor'){
                     window.location.href = 'indexConductor.html';
                 }else{
-                    //mostrarAlerta();
-                    alert("error en asignacion de rol");
+                    Swal.fire({
+                      title: "Error",
+                      text: "error en asignacion de rol!",
+                      icon: "error",
+                      iconColor: "#365CCD",
+                      confirmButtonColor: "#365CCD"
+                    });
                 }
             }
         }else{
-            //mostrarAlerta();
-            alert("usuario inexistente");
+            Swal.fire({
+              title: "Error",
+              text: "usuario inexistente!",
+              icon: "error",
+              iconColor: "#365CCD",
+              confirmButtonColor: "#365CCD"
+            });
         }
 }
 function validarLogin(){
@@ -76,36 +91,34 @@ function validarLogin(){
     datos.password = document.getElementById('txtPassword').value;
     const errorEmail = document.getElementById('lblErrorEmail');
     const errorPass = document.getElementById('lblErrorPass');
-        if(datos.correo===''){
-            errorEmail.innerHTML="Ingrese correo";
-        }else if(!esValidoCorreo(datos.correo)){
-            errorEmail.innerHTML="Correo en formato incorrecto";
-        }else{
-            errorEmail.innerHTML="";
-        }
-        if(datos.password===''){
-            errorPass.innerHTML="Ingrese contrasena";
-        }else if(datos.password.length<6){
-            errorPass.innerHTML="Contrasena errorea";
-        }else{
-            errorPass.innerHTML="";
-        }
-        if(errorEmail.innerHTML === "" && errorPass.innerHTML === ""){
-            iniciarSesion(datos.correo,datos.password);
-        }
+    if(datos.correo===''){
+        errorEmail.innerHTML="Ingrese correo";
+    }else if(!esValidoCorreo(datos.correo)){
+        errorEmail.innerHTML="Correo en formato incorrecto";
+    }else{
+        errorEmail.innerHTML="";
+    }
+    if(datos.password===''){
+        errorPass.innerHTML="Ingrese contrasena";
+    }else if(datos.password.length<6){
+        errorPass.innerHTML="Contrasena errorea";
+    }else{
+        errorPass.innerHTML="";
+    }
+    if(errorEmail.innerHTML === "" && errorPass.innerHTML === ""){
+        iniciarSesion(datos.correo,datos.password);
+    }
 }
 function esValidoCorreo(email){
     const patron = /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/;
     return patron.test(String(email));
 }
 function esValidaLaContrasena(pass) {
-    //const expresion = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
     const expresion = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#(){}[\]^\\/\|<>,.:;_-])[A-Za-z\d@$!%*?&#(){}[\]^\\/\|<>,.:;_-]{8,}$/;
     return expresion.test(String(pass));
 }
 function validarContrasena(){
         const email=localStorage.getItem('correo');
-        //const passActual=localStorage.getItem('password');
         const passActual=localStorage.getItem('password');
         const actual=document.getElementById('txtactualpass');
         const nueva = document.getElementById('txtnuevapass');
@@ -146,27 +159,46 @@ function validarContrasena(){
 }
 async function agregarPassBD(correo,passs){
     let datos = {};
-        datos.correo = correo;
+        datos.idUsuario = localStorage.getItem("idUsuario");
+        datos.correo = localStorage.getItem("email");
         datos.password = passs;
-        console.log(datos.password);
          const request = await fetch('api/usuarios/password', {
-                        method: 'POST',
-                        headers: {
-                          'Accept': 'application/json',
-                          'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify(datos)
-                });
-                const answer = await request.text();
-                alert(answer);
-                if(answer=='exito'){
-                    window.location.href = 'login.html';
+                method: 'POST',
+                headers: {
+                  'Accept': 'application/json',
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(datos)
+        });
+        const answer = await request.text();
+        if(answer=='exito'){
+            Swal.fire({
+              title: "Bien!",
+              text: "Se cambio la Contraseña!",
+              icon: "success",
+              iconColor: "#365CCD",
+              confirmButtonColor: "#365CCD"
+            }).then((result) => {
+                window.location.href = 'login.html';
+            });
 
-                }else if(answer=='fail'){
-                    alert("fallo algo, revisar");
-                }else{
-                    alert("respodio otra cosa");
-                }
+        }else if(answer=='fail'){
+            Swal.fire({
+              title: "Error",
+              text: "fallo algo, revisar!",
+              icon: "error",
+              iconColor: "#365CCD",
+              confirmButtonColor: "#365CCD"
+            });
+        }else{
+            Swal.fire({
+              title: "Error",
+              text: "respodio otra cosa!",
+              icon: "error",
+              iconColor: "#365CCD",
+              confirmButtonColor: "#365CCD"
+            });
+        }
 }
 function correoEsValido(){
     const email = document.getElementById('txtemail').value
@@ -243,23 +275,44 @@ async function agregarPassBDCorreo(passs){
     const url = new URL(urlActual);
     const correo = url.searchParams.get("email");
     let datos = {};
-        datos.correo = correo;
-        datos.password = passs;
-         const request = await fetch('api/usuarios/passwordXcorreo', {
-                        method: 'POST',
-                        headers: {
-                          'Accept': 'application/json',
-                          'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify(datos)
-                });
-                const answer = await request.text();
-                if(answer=='exito'){
-                    window.location.href = 'login.html';
+    datos.correo = correo;
+    datos.password = passs;
+     const request = await fetch('api/usuarios/passwordXcorreo',
+     {
+                method: 'POST',
+                headers: {
+                  'Accept': 'application/json',
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(datos)
+        });
+        const answer = await request.text();
+        if(answer=='exito'){
+            Swal.fire({
+              title: "Bien!",
+              text: "Se cambio la Contraseña!",
+              icon: "success",
+              iconColor: "#365CCD",
+              confirmButtonColor: "#365CCD"
+            }).then((result) => {
+                window.location.href = 'login.html';
+            });
 
-                }else if(answer=='fail'){
-                    alert("fallo algo, revisar");
-                }else{
-                    alert("respodio otra cosa");
-                }
+        }else if(answer=='fail'){
+            Swal.fire({
+              title: "Bien!",
+              text: "fallo algo, revisar!",
+              icon: "success",
+              iconColor: "#365CCD",
+              confirmButtonColor: "#365CCD"
+            });
+        }else{
+            Swal.fire({
+              title: "Bien!",
+              text: "respodio otra cosa!",
+              icon: "success",
+              iconColor: "#365CCD",
+              confirmButtonColor: "#365CCD"
+            });
+     }
 }

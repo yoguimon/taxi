@@ -54,7 +54,8 @@ public class Usuario {
         this.estado = estado;
     }
 
-    public Usuario(String correo, String password) {
+    public Usuario(byte idUsuario, String correo, String password) {
+        this.idUsuario = idUsuario;
         this.correo = correo;
         this.password = password;
     }
