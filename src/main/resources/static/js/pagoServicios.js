@@ -269,10 +269,15 @@ async function pagarServicios(){
       const response = await request.json();
       const numero = parseInt(response);
       localStorage.idPago=numero;
-
-      generarPdf();
-
-    // $('#modalOk').modal('show');
+        Swal.fire({
+          title: "Bien!",
+          text: "El Pago se registro con exito!",
+          icon: "success",
+          iconColor: "#365CCD",
+          confirmButtonColor: "#365CCD"
+        }).then((result) => {
+            generarPdf();
+        });
 }
 async function generarPdf(){
     //$('#modalOk').modal('hide');

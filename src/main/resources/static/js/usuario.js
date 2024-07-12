@@ -27,7 +27,6 @@ async function iniciarSesion(email,pass){
                 window.location.href = 'cambiarContrasena.html';
 
             }else if(answer=='viejo'){
-                localStorage.setItem('password', datos.password);
                 verificarYAsignarRol();
             }else{
                 //mostrarAlerta();
@@ -51,6 +50,7 @@ async function verificarYAsignarRol(){
             localStorage.clear();
             localStorage.token = respuesta[0];
             localStorage.email = login.correo;
+            localStorage.password = login.password;
             localStorage.rol = respuesta[1];
             localStorage.idConductor = respuesta[2];
             localStorage.idUsuario = respuesta[3];
@@ -105,8 +105,8 @@ function esValidaLaContrasena(pass) {
 }
 function validarContrasena(){
         const email=localStorage.getItem('correo');
+        //const passActual=localStorage.getItem('password');
         const passActual=localStorage.getItem('password');
-
         const actual=document.getElementById('txtactualpass');
         const nueva = document.getElementById('txtnuevapass');
         const repetirnueva = document.getElementById('txtrepetirpass');
@@ -148,6 +148,7 @@ async function agregarPassBD(correo,passs){
     let datos = {};
         datos.correo = correo;
         datos.password = passs;
+        console.log(datos.password);
          const request = await fetch('api/usuarios/password', {
                         method: 'POST',
                         headers: {

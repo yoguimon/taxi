@@ -118,6 +118,13 @@ async function agregarFrecuenciaABD(id,placa,costo,fechaInicio,fechaFin){
             body: JSON.stringify(frecuencia)
         });
     $('#modalFrecuenciaAdquirida').modal('hide');
+    Swal.fire({
+       title: "Bien!",
+       text: "Se agrego la frecuencia correctamente!",
+       icon: "success",
+       iconColor: "#365CCD",
+       confirmButtonColor: "#365CCD"
+     });
 }
 function verFrecuencias(id, placa) {
     // Convierte el ID y la placa a cadenas de texto

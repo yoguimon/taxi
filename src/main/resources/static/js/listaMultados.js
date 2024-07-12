@@ -97,6 +97,13 @@ function agregarMulta(id,nombre,placa){
                  body: JSON.stringify(multa)
          });
          $('#formMulta').modal('hide');
+         Swal.fire({
+           title: "Bien!",
+           text: "Se agrego la multa correctamente!",
+           icon: "success",
+           iconColor: "#365CCD",
+           confirmButtonColor: "#365CCD"
+         });
  }
  function verMultas(id,placa){
     // Convierte el ID y el nombre a cadenas de texto
