@@ -18,7 +18,7 @@ RUN ./mvnw dependency:go-offline
 COPY . .
 
 # Construir el proyecto
-RUN ./mvnw clean package -DskipTests
+RUN chmod +x ./mvnw && ./mvnw clean package -DskipTests
 
 # Exponer el puerto 8080
 EXPOSE 8080
