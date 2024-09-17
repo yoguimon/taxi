@@ -9,6 +9,10 @@ function usuarioConductor(){
 }
 
 async function iniciarSesion(email,pass){
+    const btn = document.querySelector("#btnlogin");
+    btn.innerHTML = 'Cargando... <i class="fas fa-spinner fa-spin"></i>';
+    btn.classList.add('disabled');
+    btn.style.pointerEvents = 'none';
     let datos = {};
     datos.correo = email;
     datos.password = pass;
@@ -84,6 +88,10 @@ async function verificarYAsignarRol(){
               confirmButtonColor: "#365CCD"
             });
         }
+        const btn = document.querySelector("#btnlogin");
+        btn.innerHTML = 'Ingresar';
+        btn.classList.remove('disabled');
+        btn.style.pointerEvents = 'auto';
 }
 function validarLogin(){
     let datos = {};
