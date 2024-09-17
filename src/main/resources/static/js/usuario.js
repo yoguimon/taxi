@@ -41,6 +41,10 @@ async function iniciarSesion(email,pass){
                   confirmButtonColor: "#365CCD"
                 });
             }
+            const btn = document.querySelector("#btnlogin");
+            btn.innerHTML = 'Ingresar';
+            btn.classList.remove('disabled');
+            btn.style.pointerEvents = 'auto';
 }
 async function verificarYAsignarRol(){
         let login = {};
