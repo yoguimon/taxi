@@ -29,7 +29,9 @@ async function iniciarSesion(email,pass){
                 localStorage.setItem('password', datos.password);
                 localStorage.setItem('correo', datos.correo);
                 window.location.href = 'cambiarContrasena.html';
-
+                btn.innerHTML = 'Ingresar';
+                btn.classList.remove('disabled');
+                btn.style.pointerEvents = 'auto';
             }else if(answer=='viejo'){
                 verificarYAsignarRol();
             }else{
@@ -40,10 +42,10 @@ async function iniciarSesion(email,pass){
                   iconColor: "#365CCD",
                   confirmButtonColor: "#365CCD"
                 });
+                btn.innerHTML = 'Ingresar';
+                btn.classList.remove('disabled');
+                btn.style.pointerEvents = 'auto';
             }
-            btn.innerHTML = 'Ingresar';
-            btn.classList.remove('disabled');
-            btn.style.pointerEvents = 'auto';
 }
 async function verificarYAsignarRol(){
         let login = {};
