@@ -11,7 +11,8 @@ async function cargarFrecuenciasPendientes(){
             }
     });
     const frecuencias = await request.json();
-
+    const nroFrecuencias = frecuencias.length;
+    document.getElementById('frecuencias').innerText = ""+nroFrecuencias;
     let listadoHtml = '';
             //para agragar usuarios de json
             let cont = 0;
