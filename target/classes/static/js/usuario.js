@@ -1,6 +1,6 @@
 function usuarioAdmin(){
-    document.getElementById('txtEmail').value="rosario@gmail.com";
-    document.getElementById('txtPassword').value="Rosario24@";
+    document.getElementById('txtEmail').value="marcelo@gmail.com";
+    document.getElementById('txtPassword').value="Marcelo23@";
 }
 
 function usuarioConductor(){

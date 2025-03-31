@@ -11,7 +11,8 @@ async function cargarMultasPendientes(){
             }
     });
     const multas = await request.json();
-
+    const nroMultas = multas.length;
+    document.getElementById('multas').innerText = ""+nroMultas;
     let listadoHtml = '';
             //para agragar usuarios de json
             let cont = 0;
