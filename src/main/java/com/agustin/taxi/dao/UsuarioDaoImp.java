@@ -51,12 +51,17 @@ public class UsuarioDaoImp implements CrudDao<Usuario>{
     }
 
     public boolean getEmp(Usuario usuario){//obtengo verdad si usuario es nuevo ya que la pass=carnet
-        String query = "SELECT COUNT(*) FROM conductor WHERE numLicencia = :numLicencia AND correo = :correo";
-        int count = ((Number) entityManager.createNativeQuery(query)
-                .setParameter("numLicencia", usuario.getPassword())
-                .setParameter("correo", usuario.getCorreo())
-                .getSingleResult()).intValue();
-        return count > 0;
+        try {
+            String query = "SELECT COUNT(*) FROM conductor WHERE numLicencia = :numLicencia AND correo = :correo";
+            int count = ((Number) entityManager.createNativeQuery(query)
+                    .setParameter("numLicencia", usuario.getPassword())
+                    .setParameter("correo", usuario.getCorreo())
+                    .getSingleResult()).intValue();
+            return count > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
     public boolean insertPass(Usuario usuario) {
         try{
