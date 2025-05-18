@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    cargarFrecuenciasPendientes();
+     cargarFrecuenciasPendientes();
 });
 async function cargarFrecuenciasPendientes(){
     var id = localStorage.getItem('idConductor');
@@ -12,7 +12,7 @@ async function cargarFrecuenciasPendientes(){
     });
     const frecuencias = await request.json();
     const nroFrecuencias = frecuencias.length;
-    document.getElementById('frecuencias').innerText = ""+nroFrecuencias;
+    //document.getElementById('frecuencias').innerText = ""+nroFrecuencias;
     let listadoHtml = '';
             //para agragar usuarios de json
             let cont = 0;
@@ -27,5 +27,5 @@ async function cargarFrecuenciasPendientes(){
                 let frecuenciaHtml =  '<tr><td>'+cont+'</td><td>'+frecuencia.tipo+'</td><td>'+frecuencia.placa+'</td><td>'+frecuencia.costo+'</td><td>'+fecha+'</td></tr>';
                 listadoHtml+=frecuenciaHtml;
           }
-          document.querySelector('#listaFrecuenciasPendientes tbody').outerHTML=listadoHtml;
+          document.querySelector('#listaFrecuenciasPendientes tbody').innerHTML=listadoHtml ? listadoHtml : '';
 }
