@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    cargarMultasPendientes();
+   cargarMultasPendientes();
 });
 async function cargarMultasPendientes(){
     var id = localStorage.getItem('idConductor');
@@ -12,7 +12,8 @@ async function cargarMultasPendientes(){
     });
     const multas = await request.json();
     const nroMultas = multas.length;
-    document.getElementById('multas').innerText = ""+nroMultas;
+    console.log("hola",nroMultas);
+    //document.getElementById('multas').innerText = ""+nroMultas;
     let listadoHtml = '';
             //para agragar usuarios de json
             let cont = 0;
@@ -21,5 +22,5 @@ async function cargarMultasPendientes(){
                 let multaHtml =  '<tr><td>'+cont+'</td><td>'+multa.tipo+'</td><td>'+multa.placa+'</td><td>'+multa.costo+'</td><td>'+multa.fechaCreacion+'</td></tr>';
                 listadoHtml+=multaHtml;
           }
-          document.querySelector('#listaMultasPendientes tbody').outerHTML=listadoHtml;
+          document.querySelector('#listaMultasPendientes tbody').innerHTML=listadoHtml ? listadoHtml : '';
 }
